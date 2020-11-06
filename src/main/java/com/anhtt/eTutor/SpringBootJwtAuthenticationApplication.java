@@ -21,6 +21,8 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.anhtt.eTutor.model.*;
+
+import java.io.FileInputStream;
 import java.util.*;
 import com.anhtt.eTutor.utils.Constants;
 
@@ -42,15 +44,16 @@ public class SpringBootJwtAuthenticationApplication extends SpringBootServletIni
 			FirebaseApp.getInstance();
 		} catch (IllegalStateException ex) {
 	        try {
-//	        	FileInputStream serviceAccount =
-//						  new FileInputStream("etutor-firebase-adminsdk.json");
-	        	// new ClassPathResource("etutor-firebase-adminsdk.json").getInputStream()
-				FirebaseOptions options = new FirebaseOptions.Builder()
-						  .setCredentials(GoogleCredentials.fromStream(AdminSDKGenerator.getAdminSDKInputStream()))
-						  .setDatabaseUrl("https://etutor-app-eb089.firebaseio.com")
-						  .build();
-				FirebaseApp.initializeApp(options);
-				System.out.println("Firebase has been init");
+                FileInputStream serviceAccount =
+                  new FileInputStream("etutor-faf5c-firebase-adminsdk-lwbci-5fa22bf04d.json");
+
+                FirebaseOptions options = new FirebaseOptions.Builder()
+                  .setCredentials(GoogleCredentials.fromStream(serviceAccount))
+                  .setDatabaseUrl("https://etutor-faf5c.firebaseio.com")
+                  .build();
+
+                FirebaseApp.initializeApp(options);
+                System.out.println("Firebase has been init");
 	    	}catch(Exception e) {
 	    		System.out.println(e.getMessage());
 	    	}

@@ -3,6 +3,8 @@ package com.anhtt.eTutor.notification.firebase;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+
+import java.io.FileInputStream;
 import java.time.Duration;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
@@ -46,10 +48,14 @@ public class FCMService {
 			FirebaseApp.getInstance();
 		} catch (IllegalStateException ex) {
 	        try {
+				FileInputStream serviceAccount =
+						new FileInputStream("etutor-faf5c-firebase-adminsdk-lwbci-5fa22bf04d.json");
+
 				FirebaseOptions options = new FirebaseOptions.Builder()
-						  .setCredentials(GoogleCredentials.fromStream(AdminSDKGenerator.getAdminSDKInputStream()))
-						  .setDatabaseUrl("https://etutor-app-eb089.firebaseio.com")
-						  .build();
+						.setCredentials(GoogleCredentials.fromStream(serviceAccount))
+						.setDatabaseUrl("https://etutor-faf5c.firebaseio.com")
+						.build();
+
 				FirebaseApp.initializeApp(options);
 				System.out.println("Firebase has been init");
 	    	}catch(Exception e) {

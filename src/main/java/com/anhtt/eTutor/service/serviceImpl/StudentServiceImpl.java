@@ -33,6 +33,7 @@ import javax.mail.MessagingException;
 import javax.mail.internet.AddressException;
 import javax.servlet.http.HttpServletRequest;
 
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.HashSet;
 import java.util.List;
@@ -97,10 +98,14 @@ public class StudentServiceImpl implements StudentService {
 			FirebaseApp.getInstance();
 		} catch (IllegalStateException ex) {
 			try {
+				FileInputStream serviceAccount =
+						new FileInputStream("etutor-faf5c-firebase-adminsdk-lwbci-5fa22bf04d.json");
+
 				FirebaseOptions options = new FirebaseOptions.Builder()
-						.setCredentials(GoogleCredentials.fromStream(AdminSDKGenerator.getAdminSDKInputStream()))
-						.setDatabaseUrl("https://etutor-app-eb089.firebaseio.com")
+						.setCredentials(GoogleCredentials.fromStream(serviceAccount))
+						.setDatabaseUrl("https://etutor-faf5c.firebaseio.com")
 						.build();
+
 				FirebaseApp.initializeApp(options);
 				System.out.println("Firebase has been init");
 			}catch(Exception e) {
