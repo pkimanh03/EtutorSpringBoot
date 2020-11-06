@@ -70,55 +70,55 @@ public class SpringBootJwtAuthenticationApplication extends SpringBootServletIni
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        Role adminRole = new Role(RoleName.ROLE_ADMIN);
-        Role tutorRole = new Role(RoleName.ROLE_TUTOR);
-        Role studentRole = new Role(RoleName.ROLE_STUDENT);
-
-        TransactionType sendTransactionType = new TransactionType(Constants.SEND);
-        TransactionType receiveTransactionType = new TransactionType(Constants.RECEIVE);
-        TransactionType topupTransactionType = new TransactionType(Constants.TOPUP);
-        TransactionType withdrawalTransactionType = new TransactionType(Constants.WWITHDRAWAL);
-        TransactionType paymentTransactionType = new TransactionType(Constants.PAYMENT);
-
-        Set<Role> roleSet = new HashSet<>();
-        roleSet.add(adminRole);
-        roleSet.add(tutorRole);
-        roleSet.add(studentRole);
-        Account eTutorAccount = new Account(Constants.ETUTOR_EMAIL, encoder.encode(Constants.ETUTOR_PASSWORD), roleSet);
-
-        roleRepository.save(adminRole);
-        roleRepository.save(studentRole);
-        roleRepository.save(tutorRole);
-
-        transactionTypeRepository.save(receiveTransactionType);
-        transactionTypeRepository.save(sendTransactionType);
-        transactionTypeRepository.save(topupTransactionType);
-        transactionTypeRepository.save(withdrawalTransactionType);
-
-        accountRepository.save(eTutorAccount);
-
-        List<Slot> slotList = new ArrayList<>();
-        List<String> date = new ArrayList<>();
-        date.add(Constants.SLOT_MONDAY);
-        date.add(Constants.SLOT_TUESDAY);
-        date.add(Constants.SLOT_WEDNESDAY);
-        date.add(Constants.SLOT_THURSDAY);
-        date.add(Constants.SLOT_FRIDAY);
-        date.add(Constants.SLOT_SATURDAY);
-        date.add(Constants.SLOT_SUNDAY);
-
-        for (String dayInWeek: date) {
-            double init = 0;
-            for (int i = 1; i <= 16; i++) {
-                String name = dayInWeek + "_" + i;
-                double st = init;
-                double et = st + 1.5;
-                Slot slot = new Slot(name, st, et, dayInWeek);
-                slotList.add(slot);
-                System.out.println("Slot " + i + ":" + slot.getName() + "-" + slot.getStartTime() + "-" + slot.getEndTime() + "-" + slot.getDayInWeek());
-                init = et;
-            }
-        }
-        slotRepository.saveAll(slotList);
+//        Role adminRole = new Role(RoleName.ROLE_ADMIN);
+//        Role tutorRole = new Role(RoleName.ROLE_TUTOR);
+//        Role studentRole = new Role(RoleName.ROLE_STUDENT);
+//
+//        TransactionType sendTransactionType = new TransactionType(Constants.SEND);
+//        TransactionType receiveTransactionType = new TransactionType(Constants.RECEIVE);
+//        TransactionType topupTransactionType = new TransactionType(Constants.TOPUP);
+//        TransactionType withdrawalTransactionType = new TransactionType(Constants.WWITHDRAWAL);
+//        TransactionType paymentTransactionType = new TransactionType(Constants.PAYMENT);
+//
+//        Set<Role> roleSet = new HashSet<>();
+//        roleSet.add(adminRole);
+//        roleSet.add(tutorRole);
+//        roleSet.add(studentRole);
+//        Account eTutorAccount = new Account(Constants.ETUTOR_EMAIL, encoder.encode(Constants.ETUTOR_PASSWORD), roleSet);
+//
+//        roleRepository.save(adminRole);
+//        roleRepository.save(studentRole);
+//        roleRepository.save(tutorRole);
+//
+//        transactionTypeRepository.save(receiveTransactionType);
+//        transactionTypeRepository.save(sendTransactionType);
+//        transactionTypeRepository.save(topupTransactionType);
+//        transactionTypeRepository.save(withdrawalTransactionType);
+//
+//        accountRepository.save(eTutorAccount);
+//
+//        List<Slot> slotList = new ArrayList<>();
+//        List<String> date = new ArrayList<>();
+//        date.add(Constants.SLOT_MONDAY);
+//        date.add(Constants.SLOT_TUESDAY);
+//        date.add(Constants.SLOT_WEDNESDAY);
+//        date.add(Constants.SLOT_THURSDAY);
+//        date.add(Constants.SLOT_FRIDAY);
+//        date.add(Constants.SLOT_SATURDAY);
+//        date.add(Constants.SLOT_SUNDAY);
+//
+//        for (String dayInWeek: date) {
+//            double init = 0;
+//            for (int i = 1; i <= 16; i++) {
+//                String name = dayInWeek + "_" + i;
+//                double st = init;
+//                double et = st + 1.5;
+//                Slot slot = new Slot(name, st, et, dayInWeek);
+//                slotList.add(slot);
+//                System.out.println("Slot " + i + ":" + slot.getName() + "-" + slot.getStartTime() + "-" + slot.getEndTime() + "-" + slot.getDayInWeek());
+//                init = et;
+//            }
+//        }
+//        slotRepository.saveAll(slotList);
     }
 }
